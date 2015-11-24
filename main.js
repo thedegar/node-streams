@@ -1,20 +1,27 @@
-//var Alphabet = require('./alphabet');
+var Alphabet = require('./alphabet');
 var Cache = require('./cache');
 var Numbers = require('./numbers');
-var Filter = require('./filter');
-//var alpha = new Alphabet();
-//var cache = new Cache({ key: 'alpha1' });
+var filter = require('./filter');
+var capitalize = require('./capitalize');
+
+
+var alpha = new Alphabet();
+var cache = new Cache({ key: 'alpha1' });
+var cache2 = new Cache({ key: 'alpha2'});
 var num = new Numbers();
 var numCache = new Cache({ key: 'number1'});
-var filter = new Filter({key: 'number1'});
+var numCache2 = new Cache({ key: 'number2'});
 
-//alpha.pipe(cache);
+//syntax 
+//input.pipe(output) <<<<<<  is this right for Write?
 num.pipe(numCache);
+num.pipe(filter).pipe(numCache2);
 
-/*cache.on('finish', function() {
-    console.log('cache store:', Cache.store);
-});*/
+//input.pipe(transform).pipe(output) <<<<<  is this right for Transform?
+alpha.pipe(cache);  //<<<<<<  should be lowercase
+alpha.pipe(capitalize).pipe(cache2); //<<<<<  should be uppercase
 
-numCache.on('finish', function() {
+
+cache2.on('finish', function() {
     console.log('cache store:', Cache.store);
 });
