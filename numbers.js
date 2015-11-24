@@ -11,8 +11,9 @@ Numbers.prototype.constructor = stream.Readable;
 
 Numbers.prototype._read = function() {
     this._curr = Math.floor((Math.random() * 100) + 1); //<<<<<when it is here it is a new number every time
+    //console.log(this._curr);
     var number = String.fromCharCode(this._curr);
-    var buf = new Buffer(number, 'utf8');
+    var buf = new Buffer(this._curr);
     this.push(buf);
     this._start++;
     if (this._start === this._end) {

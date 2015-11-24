@@ -2,7 +2,7 @@ var filter = require('stream').Transform();
 
 
 filter._transform = function (chunk, encoding, done) {
-    var data = chunk.toString();
+    var data = chunk;
     this.push(data);
     done();
 };
